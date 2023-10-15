@@ -1,3 +1,4 @@
 start-venv.sh
+.gitignore
 .git/
 py-env/
