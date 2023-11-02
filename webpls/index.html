@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html Lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/styles.css">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <main class="app">
+            <div class="header">
+                <h2>Upload Images</h2>
+                <div class="server-message"></div>
+            </div>
+
+            <div class="input-div">
+                <p>Drag and drop images here or <span class="browse">Browse</span></p>
+                <input type="file" class="file" multiple="multiple" accept="image/png, image/jpeg, image/jpg">
+            </div>
+            
+            <form id="saved-form">
+                <div class="header">
+                    <h3>Saved In Server</h3>
+                    <button type="submit">Delete</button>
+                </div>
+                <div class="saved-div"></div>
+            </form>
+
+            <form id="queued-form">
+                <div>
+                    <h3>Queued</h3>
+                    <button type="submit">Upload</button>
+                </div>
+                <div class="queued-div"></div>
+            </form>
+        </main>
+
+        
+        <script>
+            let queuedImagesArray = [],
+            savedForm = document.querySelector("#saved-form"),
+            queuedForm = document.querySelector('#queued-form'),
+            savedDiv = document.querySelector(".saved-fdiv"),
+            queuedDiv = document.querySelector(".queued-div"),
+            inputDiv = document.querySelector('.input-div')
+            input = document.querySelector(".input-div input"),
+            serverMessage = document.querySelector(".server-message"),
+            deleteImages = [];
+
+            //saved in server
+
+            //queued in frontend
+            input.addEventListener("change", () => {
+                const files = input.files
+                for(let i = 0; i < files.length; i++){
+                    queuedImagesArray.push(files[i])
+                }
+                queuedForm.reset()
+                displayQueuedImages()
+            })
+
+            inputDiv.addEventListener("drop", (e) => {
+                e.preventDefault()
+                const files = e.dataTransfer.files
+                for(let i = 0; i < files.length; i++){
+                    if(!files[i].type.match("image")) countinue
+
+                    if(queuedImagesArray.every(image=>image.name !== files[i].name))
+                    queuedImagesArray.push(files[i])
+                }
+                displayQueuedImages()
+            })
+
+            function displayQueuedImages(){
+                let images = ""
+                queuedImagesArray.forEach((image, index) =>{
+                    images +=`<div class="image">
+                              <img src="${URL.createObjectURL(image)}" alt="image">
+                              <span onclick="deleteQueuedImage(${index})">&times;</span>
+                              </div>`
+                })
+                queuedDiv.innerHTML = images
+            }
+
+            function deleteQueuedImage(index){
+                queuedImagesArray.splice(index, 1)
+                displayQueuedImages()
+            }
+        </script>
+    </body>
+</html>
