@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 def draw_confusion_matrix(cm, labels):
     class_num = len(labels)
     tick_marks = range(class_num)
-    thresh = (cm.max()-cm.min()) / 2
+    thresh = cm.min() + (cm.max()-cm.min()) / 2
 
     fig, ax = plt.subplots()
     im = ax.matshow(cm, cmap=plt.cm.gray_r)
