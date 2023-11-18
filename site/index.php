@@ -72,7 +72,7 @@
                                                             <div class="custom-file">
                                                                 <div class="input-group mb-3">
                                                                     <input type="file" name="fileUpload" class="form-control" id="chooseFile">
-                                                                    <label class="input-group-text" for="chooseFile">Select file</label>
+                                                                    <!-- <label class="input-group-text" for="chooseFile">Select file</label> -->
                                                                 </div>
                                                             </div>
                                                             <button type="submit" name="submit" class="btn btn-success">Upload File</button>
