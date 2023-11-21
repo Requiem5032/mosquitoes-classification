@@ -50,55 +50,7 @@
                             <h1 class="hero-title h2-mobile mt-0 is-revealing">Mosquito Image Database</h1>
                             <p class="hero-paragraph is-revealing">This database is created for mosquito, especially Culex Quinquefasciatus and Aedes Aegypti. This can help us to build a better disease-detecting AI model.</p>
                             <!-- <p class="hero-cta is-revealing"><a class="button button-primary button-shadow" href="#">Upload</a></p> -->
-                            <div class = "upload">
-                                <?php include("upload.php"); ?>
-                                    <div class="container mt-5">
-                                        <div class="row">
-                                            <div class="col-md-8 offset-2">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <!-- response messages -->
-                                                        <?php if(!empty($resMessage)) {?>
-                                                            <div class="alert <?php echo $resMessage['status']?>">
-                                                                <?php echo $resMessage['message']?>
-                                                            </div>
-                                                        <?php }?>
-                                                        <form action="" method="post" enctype="multipart/form-data" class="mb-3">
-                                                            <div class="user-image mb-3 text-center">
-                                                                <div style="width: 100px; height: 100px; overflow: hidden; background: #cccccc; margin: 0 auto">
-                                                                    <img src="..." class="figure-img img-fluid rounded" id="imgPlaceholder" alt="">
-                                                                </div>
-                                                            </div>
-                                                            <div class="custom-file">
-                                                                <div class="input-group mb-3">
-                                                                    <input type="file" name="fileUpload" class="form-control" id="chooseFile">
-                                                                    <!-- <label class="input-group-text" for="chooseFile">Select file</label> -->
-                                                                </div>
-                                                            </div>
-                                                            <button type="submit" name="submit" class="btn btn-success">Upload File</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-                            <script>
-                                function readURL(input) {
-                                    if (input.files && input.files[0]) {
-                                        var reader = new FileReader();
-                                        reader.onload = function (e) {
-                                            $('#imgPlaceholder').attr('src', e.target.result);
-                                        }
-                                        reader.readAsDataURL(input.files[0]); // convert to base64 string
-                                    }
-                                }
-                                $("#chooseFile").change(function () {
-                                    readURL(this);
-                                });
-                            </script>
+                        </div>
                         <div class="hero-illustration is-revealing">
                             <svg width="528" height="413" viewBox="0 0 528 413" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
@@ -165,6 +117,56 @@
                 </div>
             </section>
 
+            <section>
+                <div class = "upload">
+                    <?php include("upload.php"); ?>
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-md-8 offset-2">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <!-- response messages -->
+                                            <?php if(!empty($resMessage)) {?>
+                                                <div class="alert <?php echo $resMessage['status']?>">
+                                                    <?php echo $resMessage['message']?>
+                                                </div>
+                                            <?php }?>
+                                            <form action="" method="post" enctype="multipart/form-data" class="mb-3">
+                                                <div class="user-image mb-3 text-center">
+                                                    <div style="width: 100px; height: 100px; overflow: hidden; background: #cccccc; margin: 0 auto">
+                                                        <img src="..." class="figure-img img-fluid rounded" id="imgPlaceholder" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <div class="input-group mb-3">
+                                                        <input type="file" name="fileUpload" class="form-control" id="chooseFile">
+                                                        <!-- <label class="input-group-text" for="chooseFile">Select file</label> -->
+                                                    </div>
+                                                </div>
+                                                <button type="submit" name="submit" class="btn btn-success">Upload File</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+                        <script>
+                            function readURL(input) {
+                                if (input.files && input.files[0]) {
+                                    var reader = new FileReader();
+                                        reader.onload = function (e) {
+                                        $('#imgPlaceholder').attr('src', e.target.result);
+                                        }
+                                        reader.readAsDataURL(input.files[0]); // convert to base64 string
+                                    }
+                            }
+                            $("#chooseFile").change(function () {
+                                readURL(this);
+                            });
+                        </script>
+                </div>   
+            </section>
             <!-- <section class="features section text-center">
                 <div class="section-square"></div>
                 <div class="container">
@@ -190,60 +192,12 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <h4 class="feature-title h3-mobile">Feature</h4>
-                                    <p class="text-sm">A pseudo-Latin text used in web design, layout, and printing in place of English to emphasise design elements.</p>
+                                    <h4 class="feature-title h3-mobile">Upload to our database!</h4>
+                                     <p class="text-sm">A pseudo-Latin text used in web design, layout, and printing in place of English to emphasise design elements.</p> -->
+                                    
+                                    <!-- </div>
                                 </div>
-                            </div>
-                            <div class="feature is-revealing">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-                                        <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="feature-2-a">
-                                                    <stop stop-color="#007CFE" stop-opacity="0" offset="0%"/>
-                                                    <stop stop-color="#007DFF" offset="100%"/>
-                                                </linearGradient>
-                                                <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="feature-2-b">
-                                                    <stop stop-color="#FF4F7A" stop-opacity="0" offset="0%"/>
-                                                    <stop stop-color="#FF4F7A" offset="100%"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <g fill="none" fill-rule="evenodd">
-                                                <path d="M0 0h32v7c0 13.807-11.193 25-25 25H0V0z" fill="url(#feature-2-a)"/>
-                                                <path d="M48 16v7c0 13.807-11.193 25-25 25h-7c0-17.673 14.327-32 32-32z" fill="url(#feature-2-b)" transform="matrix(1 0 0 -1 0 64)"/>
-                                            </g>
-                                        </svg>
-
-                                    </div>
-                                    <h4 class="feature-title h3-mobile">Feature</h4>
-                                    <p class="text-sm">A pseudo-Latin text used in web design, layout, and printing in place of English to emphasise design elements.</p>
-                                </div>
-                            </div>
-                            <div class="feature is-revealing">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-                                        <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="feature-3-a">
-                                                    <stop stop-color="#007CFE" stop-opacity="0" offset="0%"/>
-                                                    <stop stop-color="#007DFF" offset="100%"/>
-                                                </linearGradient>
-                                                <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="feature-3-b">
-                                                    <stop stop-color="#FF4F7A" stop-opacity="0" offset="0%"/>
-                                                    <stop stop-color="#FF4F7A" offset="100%"/>
-                                                </linearGradient>
-                                            </defs>
-                                            <g fill="none" fill-rule="evenodd">
-                                                <circle fill="url(#feature-3-a)" cx="16" cy="16" r="16"/>
-                                                <path d="M16 16c17.673 0 32 14.327 32 32H16V16z" fill="url(#feature-3-b)"/>
-                                            </g>
-                                        </svg>
-
-                                    </div>
-                                    <h4 class="feature-title h3-mobile">Feature</h4>
-                                    <p class="text-sm">A pseudo-Latin text used in web design, layout, and printing in place of English to emphasise design elements.</p>
-                                </div>
-                            </div>
+                            </div> 
                             <div class="feature is-revealing">
                                 <div class="feature-inner">
                                     <div class="feature-icon">
@@ -272,7 +226,7 @@
                         </div>
                     </div>
                 </div>
-            </section> -->
+            </section>  -->
 
             <!-- <section class="pricing section">
                 <div class="section-square"></div>
