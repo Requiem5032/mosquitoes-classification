@@ -32,7 +32,7 @@
         } else if (file_exists($target_file)) {
             $resMessage = array(
                 "status" => "alert-danger",
-                "message" => "The File already exists."
+                "message" => "The file already exists."
             );
         } else {
             if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
