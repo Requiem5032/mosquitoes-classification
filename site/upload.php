@@ -5,12 +5,12 @@
     $conn = $db->connect();  
 
     if(isset($_POST["submit"])) {
-        // Set image placement folder
-        $target_dir = "images/";
-        // Get file path
-        $target_file = $target_dir . basename($_FILES["fileUpload"]["name"]);
+        // // Set image placement folder
+        // $target_dir = "images/";
+        // // Get file path
+        // $target_file = $target_dir . basename($_FILES["fileUpload"]["name"]);
         // Get file extension
-        $imageExt = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $imageExt = strtolower(pathinfo($_FILES["fileUpload"]["name"], PATHINFO_EXTENSION));
         // Allowed file types
         $allowd_file_ext = array("jpg", "jpeg", "png");
   
@@ -29,15 +29,20 @@
                 "status" => "alert-danger",
                 "message" => "File is too large. File size should be less than 2 megabytes."
             );
-        } else if (file_exists($target_file)) {
-            $resMessage = array(
-                "status" => "alert-danger",
-                "message" => "The file already exists."
-            );
+        // } else if (file_exists($target_file)) {
+        //     $resMessage = array(
+        //         "status" => "alert-danger",
+        //         "message" => "The file already exists."
+        //     );
         } else {
-            if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
-                $sql = "INSERT INTO mosq_images (image_id) VALUES ('$target_file')";
+            // if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
+            if (isset($_FILES["fileUpload"]) && $_FILES["fileUpload"]["error"] == 0) {
+                $img = $_FILES['fileUpload']['tmp_name'];
+                $imgContent = file_get_contents($img);
+
+                $sql = "INSERT INTO mosq_img (img_ctnt) VALUES (:blob)";
                 $stmt = $conn->prepare($sql);
+                $stmt->bindParam(":blob", $imgContent);
                 if($stmt->execute()){
                     $resMessage = array(
                         "status" => "alert-success",

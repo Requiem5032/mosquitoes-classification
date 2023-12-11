@@ -139,7 +139,7 @@
                                                 </div>
                                                 <div class="custom-file">
                                                     <div class="input-group mb-3">
-                                                        <input type="file" name="fileUpload" class="form-control" id="chooseFile">
+                                                        <input type="file" name="fileUpload" accept="fileUpload/*" class="form-control" id="chooseFile">
                                                         <!-- <label class="input-group-text" for="chooseFile">Select file</label> -->
                                                     </div>
                                                 </div>
