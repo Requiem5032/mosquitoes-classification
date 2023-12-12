@@ -39,9 +39,11 @@
             if (isset($_FILES["fileUpload"]) && $_FILES["fileUpload"]["error"] == 0) {
                 $img = $_FILES['fileUpload']['tmp_name'];
                 $imgContent = file_get_contents($img);
+                $imgName = $_FILES["fileUpload"]["name"];
 
-                $sql = "INSERT INTO mosq_img (img_ctnt) VALUES (:blob)";
+                $sql = "INSERT INTO mosq_img (img_name ,img_ctnt) VALUES (:string, :blob)";
                 $stmt = $conn->prepare($sql);
+                $stmt->bindParam(":string", $imgName);
                 $stmt->bindParam(":blob", $imgContent);
                 if($stmt->execute()){
                     $resMessage = array(

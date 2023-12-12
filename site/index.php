@@ -167,6 +167,11 @@
                         </script>
                 </div>   
             </section>
+
+            <section>
+                
+            </section>
+
             <!-- <section class="features section text-center">
                 <div class="section-square"></div>
                 <div class="container">
@@ -226,7 +231,7 @@
                         </div>
                     </div>
                 </div>
-            </section>  -->
+            </section> -->
 
             <!-- <section class="pricing section">
                 <div class="section-square"></div>
@@ -378,8 +383,8 @@
                         </div>
                     </div>
                 </div>
-            </section>
-        </main> -->
+            </section> -->
+        </main>
 
         <footer class="site-footer text-light">
             <div class="container">
