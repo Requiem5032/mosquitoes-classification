@@ -1,3 +1,9 @@
+<?php 
+    include_once("DBConnect.php");
+    include_once("show.php");
+    include_once("upload.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +55,6 @@
                         <div class="hero-copy">
                             <h1 class="hero-title h2-mobile mt-0 is-revealing">Mosquito Image Database</h1>
                             <p class="hero-paragraph is-revealing">This database is created for mosquito, especially Culex Quinquefasciatus and Aedes Aegypti. This can help us to build a better disease-detecting AI model.</p>
-                            <!-- <p class="hero-cta is-revealing"><a class="button button-primary button-shadow" href="#">Upload</a></p> -->
                         </div>
                         <div class="hero-illustration is-revealing">
                             <svg width="528" height="413" viewBox="0 0 528 413" xmlns="http://www.w3.org/2000/svg">
@@ -140,7 +145,6 @@
                                                 <div class="custom-file">
                                                     <div class="input-group mb-3">
                                                         <input type="file" name="fileUpload" accept="fileUpload/*" class="form-control" id="chooseFile">
-                                                        <!-- <label class="input-group-text" for="chooseFile">Select file</label> -->
                                                     </div>
                                                 </div>
                                                 <button type="submit" name="submit" class="btn btn-success">Upload File</button>
@@ -168,8 +172,39 @@
                 </div>   
             </section>
 
-            <section>
-                
+            <section class="bg-dark">
+                <?php
+                    $_SESSION['show'] = show();
+                ?>
+                <div class="container">
+                    <div class="row">
+                        <div class="col m-auto">
+                            <div class="card mt-5">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td> ID </td>
+                                        <td> Name </td>
+                                        <td> Image </td>
+                                    </tr>
+                                    <?php
+                                        foreach($_SESSION['show'] as $show) :
+                                            $ID = $show['id'];
+                                            $Name = $show['img_name'];
+                                            $Image = $show['img_ctnt'];
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $ID ?></td>
+                                        <td><?php echo $Name ?></td>
+                                        <td><?php echo '<img src="data:image/jpeg;base64,'.base64_encode($Image).'"/>'; ?></td>
+                                    </tr>
+                                    <?php
+                                        endforeach;
+                                    ?>            
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>                   
             </section>
 
             <!-- <section class="features section text-center">

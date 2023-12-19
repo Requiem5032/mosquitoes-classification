@@ -1,6 +1,6 @@
 <?php 
     // Database connection
-    include("DBConnect.php");
+    // include("DBConnect.php");
     $db = new DBConnect();
     $conn = $db->connect();  
 
