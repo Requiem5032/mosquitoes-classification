@@ -39,9 +39,10 @@ def make_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index=None
     return heatmap.numpy()
 
 
-def save_and_display_gradcam(img_path, heatmap, cam_path="cam.jpg", alpha=0.4):
-    img = tf.keras.utils.load_img(img_path)
-    img = tf.keras.utils.img_to_array(img)
+def save_and_display_gradcam(img_path, heatmap, size, cam_path="cam.jpg", alpha=0.4):
+    img = cv2.imread(img_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = cv2.resize(img, size, interpolation=cv2.INTER_LINEAR)
 
     heatmap = np.uint8(255 * heatmap)
 
