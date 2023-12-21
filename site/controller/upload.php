@@ -17,17 +17,17 @@
         if (!file_exists($_FILES["fileUpload"]["tmp_name"])) {
            $resMessage = array(
                "status" => "alert-danger",
-               "message" => "Select image to upload."
+               "message" => "Something is wrong. Please try again."
            );
         } else if (!in_array($imageExt, $allowd_file_ext)) {
             $resMessage = array(
                 "status" => "alert-danger",
                 "message" => "Allowed file formats .jpg, .jpeg and .png."
             );            
-        } else if ($_FILES["fileUpload"]["size"] > 2097152) {
+        } else if ($_FILES["fileUpload"]["size"] > 3145728) {
             $resMessage = array(
                 "status" => "alert-danger",
-                "message" => "File is too large. File size should be less than 2 megabytes."
+                "message" => "File is too large. File size should be less than 3MB."
             );
         // } else if (file_exists($target_file)) {
         //     $resMessage = array(

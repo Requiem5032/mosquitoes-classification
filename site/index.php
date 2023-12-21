@@ -1,7 +1,8 @@
 <?php 
-    include_once("DBConnect.php");
-    include_once("show.php");
-    include_once("upload.php");
+    include_once 'model/DBConnect.php';
+    include_once 'controller/show.php';
+    include_once 'controller/upload.php';
+    include_once 'controller/download.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
     <title>Image Uploader</title>
     <link href="https://fonts.googleapis.com/css?family=Hind+Vadodara:400,700|Mukta:500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="dist/css/style.css">
+    <link rel="stylesheet" href="view/dist/css/style.css">
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 </head>
 <body class="is-boxed has-animations">
@@ -124,58 +125,56 @@
 
             <section>
                 <div class = "upload">
-                    <?php include("upload.php"); ?>
-                        <div class="container mt-5">
-                            <div class="row">
-                                <div class="col-md-8 offset-2">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <!-- response messages -->
-                                            <?php if(!empty($resMessage)) {?>
-                                                <div class="alert <?php echo $resMessage['status']?>">
-                                                    <?php echo $resMessage['message']?>
+                    <?php // include 'controller/upload.php'; ?>
+                    <div class="container mt-5">
+                        <div class="row">
+                            <div class="col-md-8 offset-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <!-- response messages -->
+                                        <?php if(!empty($resMessage)) {?>
+                                            <div class="alert <?php echo $resMessage['status']?>">
+                                                <?php echo $resMessage['message']?>
+                                            </div>
+                                        <?php }?>
+                                        <form action="" method="post" enctype="multipart/form-data" class="mb-3">
+                                            <div class="user-image mb-3 text-center">
+                                                <div style="width: 100px; height: 100px; overflow: hidden; background: #cccccc; margin: 0 auto">
+                                                     <img src="..." class="figure-img img-fluid rounded" id="imgPlaceholder" alt="">
                                                 </div>
-                                            <?php }?>
-                                            <form action="" method="post" enctype="multipart/form-data" class="mb-3">
-                                                <div class="user-image mb-3 text-center">
-                                                    <div style="width: 100px; height: 100px; overflow: hidden; background: #cccccc; margin: 0 auto">
-                                                        <img src="..." class="figure-img img-fluid rounded" id="imgPlaceholder" alt="">
-                                                    </div>
+                                            </div>
+                                            <div class="custom-file">
+                                                <div class="input-group mb-3">
+                                                    <input type="file" name="fileUpload" accept="fileUpload/*" class="form-control" id="chooseFile">
                                                 </div>
-                                                <div class="custom-file">
-                                                    <div class="input-group mb-3">
-                                                        <input type="file" name="fileUpload" accept="fileUpload/*" class="form-control" id="chooseFile">
-                                                    </div>
-                                                </div>
-                                                <button type="submit" name="submit" class="btn btn-success">Upload File</button>
-                                            </form>
-                                        </div>
+                                            </div>
+                                            <button type="submit" name="submit" class="btn btn-success">Upload File</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-                        <script>
-                            function readURL(input) {
-                                if (input.files && input.files[0]) {
-                                    var reader = new FileReader();
-                                        reader.onload = function (e) {
-                                        $('#imgPlaceholder').attr('src', e.target.result);
-                                        }
-                                        reader.readAsDataURL(input.files[0]); // convert to base64 string
+                    </div>
+                    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+                    <script>
+                        function readURL(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                    $('#imgPlaceholder').attr('src', e.target.result);
                                     }
-                            }
-                            $("#chooseFile").change(function () {
-                                readURL(this);
-                            });
-                        </script>
+                                    reader.readAsDataURL(input.files[0]); // convert to base64 string
+                                }
+                        }
+                         $("#chooseFile").change(function () {
+                            readURL(this);
+                        });
+                    </script>
                 </div>   
             </section>
 
             <section class="bg-dark">
-                <?php
-                    $_SESSION['show'] = show();
-                ?>
+                <?php $_SESSION['show'] = show(); ?>
                 <div class="container">
                     <div class="row">
                         <div class="col m-auto">
@@ -185,6 +184,7 @@
                                         <td> ID </td>
                                         <td> Name </td>
                                         <td> Image </td>
+                                        <td> Download </td>
                                     </tr>
                                     <?php
                                         foreach($_SESSION['show'] as $show) :
@@ -196,6 +196,7 @@
                                         <td><?php echo $ID ?></td>
                                         <td><?php echo $Name ?></td>
                                         <td><?php echo '<img src="data:image/jpeg;base64,'.base64_encode($Image).'"/>'; ?></td>
+                                        <td><a href="download.php?img_id=<?php echo $ID?>" class="btn btn-primary">Download</a></td>
                                     </tr>
                                     <?php
                                         endforeach;

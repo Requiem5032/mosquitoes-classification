@@ -1,6 +1,9 @@
 <?php
     // Database connection
-    include("DBConnect.php");
+    // include("DBConnect.php");
+
+	include_once dirname(__FILE__) . '/../model/DBConnect.php';
+
     $db = new DBConnect();
     $conn = $db->connect();
  
@@ -11,7 +14,8 @@
 		$fetch = $query->fetch();
  
 		header("Content-Disposition: attachment; filename=".$fetch['img_name']);
-		header("Content-Type: application/octet-stream;");
-		readfile("uploads/".$fetch['img_name']);
+		header("Content-ID:".$fetch['id']);
+		header("Content-Type: image/png");
+		echo base64_encode($fetch['img_ctnt']);
 	}
 ?>
