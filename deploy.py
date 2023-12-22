@@ -2,7 +2,6 @@ from tensorflow.keras.saving import load_model
 from tkinter import *
 from tkinter import filedialog as fd
 from PIL import Image, ImageTk
-import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 import cv2
