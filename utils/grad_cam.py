@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 import tensorflow as tf
-import matplotlib.pyplot as plt
 
 from IPython.display import Image, display
 from matplotlib import colormaps
@@ -39,7 +38,7 @@ def make_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index=None
     return heatmap.numpy()
 
 
-def save_and_display_gradcam(img_path, heatmap, size, cam_path="cam.jpg", alpha=0.4):
+def save_and_display_gradcam(img_path, heatmap, size, cam_path="cam.jpg", alpha=0.5):
     img = cv2.imread(img_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = cv2.resize(img, size, interpolation=cv2.INTER_LINEAR)
@@ -55,7 +54,7 @@ def save_and_display_gradcam(img_path, heatmap, size, cam_path="cam.jpg", alpha=
     jet_heatmap = jet_heatmap.resize((img.shape[1], img.shape[0]))
     jet_heatmap = tf.keras.utils.img_to_array(jet_heatmap)
 
-    superimposed_img = jet_heatmap * alpha + img
+    superimposed_img = jet_heatmap * alpha + img * alpha
     superimposed_img = tf.keras.utils.array_to_img(superimposed_img)
 
     superimposed_img.save(cam_path)

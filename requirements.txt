@@ -3,6 +3,7 @@ opencv-python
 matplotlib
 scikit-learn
 ipykernel
+tk
 pydot
 graphviz
 --extra-index-url https://pypi.nvidia.com tensorrt-bindings==8.6.1 tensorrt-libs==8.6.1
