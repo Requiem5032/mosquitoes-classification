@@ -13,7 +13,7 @@ IMG_SIZE = (IMG_DIM, IMG_DIM)
 IMG_SHAPE = IMG_SIZE + (3,)
 
 class_names = ['Aedes Aegypti', 'Culex Quinquefasciatus']
-model = load_model('models/deploy_model.keras')
+model = load_model('models/model.h5')
 
 root = Tk()
 root.title('Deploy')
